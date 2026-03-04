@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Act 1 - System Boot</title>
+
+<style>
+
+body{
+    margin:0;
+    background:black;
+    color:#00ff41;
+    font-family:monospace;
+    overflow:hidden;
+}
+
+/* LOADING SCREEN */
+
+#loading{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:28px;
+}
+
+/* MAIN SCENE */
+
+#scene{
+    display:none;
+    padding:40px;
+}
+
+/* IMAGE */
+
+#image-container{
+    width:400px;
+    height:400px;
+    border:2px solid #222;
+    background:#050505;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+#image-container img{
+    max-width:100%;
+    max-height:100%;
+    opacity:0;
+    transition:2s;
+}
+
+.show{
+    opacity:1 !important;
+}
+
+/* TERMINAL */
+
+#terminal{
+    border:1px solid #00ff41;
+    padding:20px;
+    height:150px;
+    overflow:hidden;
+    white-space:pre-wrap;
+    margin-bottom:20px;
+}
+
+/* GLITCH EFFECT */
+
+.glitch{
+    animation:shake 0.1s infinite;
+    color:red;
+}
+
+@keyframes shake{
+    0%{transform:translate(2px,0);}
+    50%{transform:translate(-2px,0);}
+    100%{transform:translate(2px,0);}
+}
+
+/* QUESTIONS */
+
+#questions{
+    display:none;
+    border:1px solid #00ff41;
+    padding:20px;
+}
+
+.question{
+    margin-bottom:15px;
+}
+
+button{
+    background:#00ff41;
+    border:none;
+    padding:12px 25px;
+    font-family:monospace;
+    cursor:pointer;
+    margin-top:20px;
+}
+
+</style>
+</head>
+<body>
+
+<!-- LOADING -->
+
+<div id="loading">SYSTEM BOOTING...</div>
+
+<!-- SCENE -->
+
+<div id="scene">
+
+<div id="image-container">
+<img id="man" src="hacker.png"
+onerror="this.parentElement.innerHTML='IMAGE FAILED TO LOAD'">
+</div>
+
+<div id="terminal"></div>
+
+<div id="questions">
+
+<h2>SCENARIO QUESTIONS</h2>
+
+<div class="question">
+A) Earliest possible time? — 11:15
+</div>
+
+<div class="question">
+B) Latest possible time? — 14:30
+</div>
+
+<div class="question">
+C) Lowest ticket at 11:45? — 018
+</div>
+
+<div class="question">
+D) Highest ticket at 11:45? — 034
+</div>
+
+<button onclick="goNext()">ENTER SYSTEM</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* REFERENCES */
+
+const loading = document.getElementById("loading");
+const scene = document.getElementById("scene");
+const terminal = document.getElementById("terminal");
+const image = document.getElementById("man");
+const questions = document.getElementById("questions");
+
+/* ===== BOOT SEQUENCE ===== */
+
+setTimeout(()=>{
+
+loading.innerText = "INITIALIZING CORE...";
+scene.style.display="block";
+
+},2000);
+
+
+/* ===== IMAGE REVEAL ===== */
+
+setTimeout(()=>{
+
+image.classList.add("show");
+terminal.innerHTML += "ENTITY DETECTED...\n";
+
+},4000);
+
+
+/* ===== SYSTEM ERRORS ===== */
+
+setTimeout(()=>{
+
+terminal.innerHTML += "LOADING FILES...\n";
+terminal.classList.add("glitch");
+
+},6000);
+
+
+/* ===== VIRUS DETECTED ===== */
+
+setTimeout(()=>{
+
+terminal.innerHTML += "WARNING: VIRUS DETECTED\n";
+terminal.innerHTML += "CALCULATING COUNTERMEASURES...\n";
+
+},8000);
+
+
+/* ===== MAN FULLY ACTIVATED ===== */
+
+setTimeout(()=>{
+
+terminal.classList.remove("glitch");
+terminal.innerHTML += "\nSYSTEM STABILIZED\n";
+
+/* Unlock Questions */
+
+questions.style.display="block";
+
+},11000);
+
+
+/* ===== REDIRECT ===== */
+
+function goNext(){
+    window.location.href="act2.html";
+}
+
+</script>
+
+</body>
+</html>
